@@ -29,3 +29,18 @@ class Square(Rectangle):
         """Sets the size of the Square (alters both width and height)."""
         self.width = value  # Use existing setter with validation
         self.height = value
+        
+    def update(self, *args, **kwargs):
+        """Updates Square attributes using positional or keyword arguments."""
+
+        # 1. Process Positional Arguments (*args)
+        if args:
+            attr_names = ["id", "size", "x", "y"]
+            for index, value in enumerate(args[:4]):  # Limit to 4 attributes
+                setattr(self, attr_names[index], value)  
+
+        # 2. Process Keyword Arguments (**kwargs)
+        else:  # Skip kwargs processing if *args were provided
+            for key, value in kwargs.items():
+                if hasattr(self, key):
+                    setattr(self, key, value)

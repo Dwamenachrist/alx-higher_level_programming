@@ -59,3 +59,7 @@ class Rectangle(Base):
         if value < 0:  # Validation changed for non-negativity
             raise ValueError("y must be >= 0")
         self.__y = value
+        
+    def area(self):
+        """Calculates and returns the area of the Rectangle."""
+        return self.width * self.height  # Accessing width/height via getters

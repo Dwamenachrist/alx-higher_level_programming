@@ -81,3 +81,16 @@ class Rectangle(Base):
         return "[Rectangle] ({}) {}/{} - {}/{}".format(
             self.id, self.x, self.y, self.width, self.height
         )
+        
+
+    def update(self, *args):
+        """Assigns attributes based on a variable number of arguments (non-keyword)."""
+        if len(args) == 0: 
+            return  # Do nothing if no arguments are provided
+
+        # Mapping between argument position (index) and attribute name
+        attr_names = ["id", "width", "height", "x", "y"]
+
+        # Assign values  (up to a maximum of five allowed arguments)
+        for index, value in enumerate(args[:5]):  # Slice args to handle only up to 5
+            setattr(self, attr_names[index], value)  

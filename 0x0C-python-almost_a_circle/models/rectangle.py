@@ -83,14 +83,17 @@ class Rectangle(Base):
         )
         
 
-    def update(self, *args):
-        """Assigns attributes based on a variable number of arguments (non-keyword)."""
-        if len(args) == 0: 
-            return  # Do nothing if no arguments are provided
+    def update(self, *args, **kwargs):
+        """Assigns attributes based on positional or keyword arguments."""
 
-        # Mapping between argument position (index) and attribute name
-        attr_names = ["id", "width", "height", "x", "y"]
+        # 1. Prioritize positional arguments (*args) if present
+        if args:  
+            attr_names = ["id", "width", "height", "x", "y"] 
+            for index, value in enumerate(args[:5]):
+                setattr(self, attr_names[index], value)  
 
-        # Assign values  (up to a maximum of five allowed arguments)
-        for index, value in enumerate(args[:5]):  # Slice args to handle only up to 5
-            setattr(self, attr_names[index], value)  
+        # 2. Handle keyword arguments (**kwargs) 
+        for key, value in kwargs.items():
+            if hasattr(self, key):  # Safety check:  Does the attribute exist?
+                setattr(self, key, value)
+  

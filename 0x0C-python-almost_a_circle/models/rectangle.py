@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 from base import Base
+from collections import OrderedDict
 
+import json
 
 class Rectangle(Base):
     """Represents a rectangle."""
@@ -98,6 +100,27 @@ class Rectangle(Base):
                 setattr(self, key, value)
                 
     def to_dictionary(self):
-        """Returns a dictionary representation of the Rectangle instance."""
-        return {'id': self.id, 'width': self.width, 
-                'height': self.height, 'x': self.x, 'y': self.y}
+        """
+        Represents a dictionary representation of rectangle
+        """
+        rec_dict = {
+                "id": self.id,
+                "width": self.width,
+                "height": self.height,
+                "x": self.x,
+                "y": self.y
+        }
+
+        return rec_dict
+    
+    @classmethod
+    def save_to_file(cls, rectangles):
+        """Saves a list of Rectangle objects to a file in JSON format."""
+        if rectangles is None:
+            data = []
+        else:
+            data = [obj.to_dictionary() for obj in rectangles]
+
+        filename = cls.__name__ + ".json"
+        with open(filename, 'w') as f:
+            json.dump(data, f)

@@ -71,3 +71,8 @@ class Rectangle(Base):
                 print("#", end="")  # Print '#' without a newline
             print()  # Move to the next line after each row
 
+    def __str__(self):
+        """Overrides the default __str__ to return a custom string representation."""
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(
+            self.id, self.x, self.y, self.width, self.height
+        )

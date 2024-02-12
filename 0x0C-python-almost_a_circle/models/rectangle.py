@@ -65,11 +65,16 @@ class Rectangle(Base):
         return self.width * self.height  # Accessing width/height via getters
 
     def display(self):
-        """Prints the Rectangle instance with '#' characters to stdout."""
-        for row in range(self.height):  # Iterate through the rows
-            for col in range(self.width):  # Iterate through the columns
-                print("#", end="")  # Print '#' without a newline
-            print()  # Move to the next line after each row
+        """Prints the Rectangle instance with '#' characters, including 'x' and 'y' offset."""
+        for y_offset in range(self.y):  # New: Add 'y' offset
+            print()  # Print blank lines for vertical shift
+
+        for row in range(self.height):
+            print(" " * self.x, end="")  # Added spaces for 'x' offset
+            for col in range(self.width):
+                print("#", end="")
+            print() 
+
 
     def __str__(self):
         """Overrides the default __str__ to return a custom string representation."""

@@ -17,4 +17,15 @@ class Square(Rectangle):
 
     def __str__(self):
         """Overrides the __str__ method to return a custom representation."""
-        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.width)       
+        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.width)
+    
+    @property
+    def size(self):
+        """Gets the size of the Square."""
+        return self.width  
+
+    @size.setter
+    def size(self, value):
+        """Sets the size of the Square (alters both width and height)."""
+        self.width = value  # Use existing setter with validation
+        self.height = value

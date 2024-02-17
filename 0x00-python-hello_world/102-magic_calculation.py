@@ -2,4 +2,4 @@
 
 def magic_calculation(a, b):
     """Performs a 'magic' calculation mirroring provided bytecode."""
-    return a ** b + 98 
+    return a ** b + 98

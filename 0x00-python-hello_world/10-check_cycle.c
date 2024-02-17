@@ -11,22 +11,21 @@
  * Return: 0 if there is no cycle, 1 if there is a cycle.
  */
 
-int check_cycle(listint_t *list)
-{
-	listint_t *current, *check;
+int check_cycle(listint_t *list) {
 
-	if (list == NULL || list->next == NULL)
-		return (0);
-	current = list;
-	check = current->next;
+    if (list == NULL || list->next == NULL) 
+        return (0); 
 
-	while (current != NULL && check->next != NULL
-		&& check->next->next != NULL)
-	{
-		if (current == check)
-			return (1);
-		current = current->next;
-		check = check->next->next;
-	}
-	return (0);
+    listint_t *slow = list;
+    listint_t *fast = list->next;
+
+    while (slow && fast && fast->next) { 
+        if (slow == fast) {
+            return 1; // Cycle found
+        }
+        slow = slow->next; 
+        fast = fast->next->next; 
+    }
+
+    return 0; // No cycle 
 }

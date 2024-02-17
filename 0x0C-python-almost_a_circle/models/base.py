@@ -1,5 +1,6 @@
 import json
 
+
 class Base:
     """
     Represents the base model
@@ -13,9 +14,15 @@ class Base:
             self.id = Base.__nb_objects
 
     @staticmethod
-    def to_json_string(list_dictionaries):
-        """Returns a JSON string representation of a list of dictionaries."""
-        if list_dictionaries is None or list_dictionaries == []:
-            return "[]"
-        else:
-            return json.dumps(list_dictionaries)
+    def from_json_string(json_string):
+        """Returns a list of instances created from a JSON string."""
+        if json_string is None or json_string == "":
+            return []
+
+        deserialized_list = json.loads(json_string)
+        instances = []
+        for obj_dict in deserialized_list:
+            if 'width' in obj_dict and 'height' in obj_dict:  # Assuming rectangles!
+                instances.append(Rectangle(**obj_dict))
+            # Potentially add similar checks for 'Square' attributes if applicable
+        return instances

@@ -1,3 +1,6 @@
 #!/usr/bin/python3
-for i in range(99):  # Iterate from 0 to 98 for correct range
-    print("{} = 0x{:x}".format(i, i)) 
+for number in range(0, 100):
+    if number == 99:
+        print("{}".format(number))
+    else:
+        print("{:02}".format(number), end=", ")

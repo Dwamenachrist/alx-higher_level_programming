@@ -1,11 +1,9 @@
 #!/usr/bin/python3
+from add_0 import add  # Import the 'add' function specifically
 
-# Import the add function from the file add_0.py
-from add_0 import add
-
-# Define the variables a and b
+# Assign values to variables
 a = 1
 b = 2
 
-# Print the result of the addition
+# Call add and print with formatting
 print("{} + {} = {}".format(a, b, add(a, b)))

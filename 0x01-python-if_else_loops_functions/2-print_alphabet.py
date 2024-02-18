@@ -1,3 +1,5 @@
 #!/usr/bin/python3
-for i in range(97, 123):
-    print(chr(i), end="")
+
+"This code prints all lowercase letters of the English alphabet in sequence on a single line."
+for letter in range(97, 123):
+    print("{}".format(chr(letter)), end="")

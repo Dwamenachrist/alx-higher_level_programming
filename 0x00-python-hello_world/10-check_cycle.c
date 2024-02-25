@@ -1,31 +1,36 @@
+/*
+ * File: 10-check_cycle.c
+ * Auth: Brennan D Baraban
+ */
+
+#include <stdlib.h>
 #include "lists.h"
 
 /**
- * check_cycle - Determines if a singly linked list contains a cycle 
- * (where a node points back to a previous node in the list).  
- * 
- * Implementation uses the 'Tortoise and Hare' technique:  two pointers traverse 
- * the list at different speeds. If they ever meet, a cycle is present.  
- * 
- * @list: Pointer to the head of the linked list.
- * Return: 0 if there is no cycle, 1 if there is a cycle.
+ * check_cycle - Checks if a singly-linked list contains a cycle.
+ * @list: A singly-linked list.
+ *
+ * Return: If there is no cycle - 0.
+ *         If there is a cycle - 1.
  */
+int check_cycle(listint_t *list)
+{
+	listint_t *turtle, *hare;
 
-int check_cycle(listint_t *list) {
+	if (list == NULL || list->next == NULL)
+		return (0);
 
-    if (list == NULL || list->next == NULL) 
-        return (0); 
+	turtle = list->next;
+	hare = list->next->next;
 
-    listint_t *slow = list;
-    listint_t *fast = list->next;
+	while (turtle && hare && hare->next)
+	{
+		if (turtle == hare)
+			return (1);
 
-    while (slow && fast && fast->next) { 
-        if (slow == fast) {
-            return 1; // Cycle found
-        }
-        slow = slow->next; 
-        fast = fast->next->next; 
-    }
+		turtle = turtle->next;
+		hare = hare->next->next;
+	}
 
-    return 0; // No cycle 
+	return (0);
 }

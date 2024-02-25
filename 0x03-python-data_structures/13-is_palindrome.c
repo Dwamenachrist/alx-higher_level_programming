@@ -1,42 +1,61 @@
 #include "lists.h"
 
-/**
- * is_palindrome - Checks if a singly linked list is a palindrome.
- * @head: Double pointer to the head of the list
- * Return: 0 if not a palindrome, 1 if palindrome
- */
+listint_t *reverse_listint(listint_t **head);
+int is_palindrome(listint_t **head);
+
+
+listint_t *reverse_listint(listint_t **head)
+{
+	listint_t *node = *head, *next, *prev = NULL;
+
+	while (node)
+	{
+		next = node->next;
+		node->next = prev;
+		prev = node;
+		node = next;
+	}
+
+	*head = prev;
+	return (*head);
+}
+
+
 int is_palindrome(listint_t **head)
 {
-    listint_t *slow = *head, *fast = *head, *prev, *temp;
+	listint_t *tmp, *rev, *mid;
+	size_t size = 0, i;
 
-    if (!head || !(*head))  /* Handle empty list */
-        return (1);
+	if (*head == NULL || (*head)->next == NULL)
+		return (1);
 
-    /* Find middle */
-    while (fast && fast->next)  
-    {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
+	tmp = *head;
+	while (tmp)
+	{
+		size++;
+		tmp = tmp->next;
+	}
 
-    /* Reverse second half */
-    prev = NULL;
-    while (slow)
-    {
-        temp = slow->next;
-        slow->next = prev;
-        prev = slow;
-        slow = temp;
-    }
+	tmp = *head;
+	for (i = 0; i < (size / 2) - 1; i++)
+		tmp = tmp->next;
 
-    /* Compare halves */
-    temp = *head;
-    while (prev)
-    {
-        if (temp->n != prev->n)
-            return (0);
-        temp = temp->next;
-        prev = prev->next;
-    }
-    return (1);
+	if ((size % 2) == 0 && tmp->n != tmp->next->n)
+		return (0);
+
+	tmp = tmp->next->next;
+	rev = reverse_listint(&tmp);
+	mid = rev;
+
+	tmp = *head;
+	while (rev)
+	{
+		if (tmp->n != rev->n)
+			return (0);
+		tmp = tmp->next;
+		rev = rev->next;
+	}
+	reverse_listint(&mid);
+
+	return (1);
 }

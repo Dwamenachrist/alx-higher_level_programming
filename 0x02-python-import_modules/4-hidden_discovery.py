@@ -1,13 +1,9 @@
 #!/usr/bin/python3
-import dis
+if __name__ == "__main__":
+    """Print all names defined by hidden_4 module."""
+    import hidden_4
 
-# Load the compiled bytecode from 'hidden_4.pyc'
-with open('hidden_4.pyc', 'rb') as f:
-    bytecode = f.read()[16:]  # Skip the bytecode header
-
-# Disassemble the bytecode
-for instruction in dis.get_instructions(bytecode):
-    if instruction.opname == 'LOAD_NAME':
-        # Ignore names starting with underscores
-        if not instruction.argval.startswith('__'):
-            print(instruction.argval)
+    names = dir(hidden_4)
+    for name in names:
+        if name[:2] != "__":
+            print(name)
